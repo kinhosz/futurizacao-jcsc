@@ -1,0 +1,9 @@
+# DUVIDAS.md — Onde a IA errou, e como percebi
+
+**Erro**: na entrevista, pedi explicitamente horizonte 2030. Na saída gerada (`TESTE.md`, seção 5, bloco YAML da roda), quatro efeitos de 3ª ordem (`e1.1.1`, `e2.1.1`, `e3.1.1`, `e4.1.1`) receberam `prazo: 2031` ou `prazo: 2032` — ultrapassando o horizonte pedido sem qualquer aviso no texto. A IA não tratou "horizonte" como um limite rígido da entrevista, e sim como uma referência solta para a ordem de grandeza dos anos.
+
+**Como percebi**: ao revisar o bloco YAML da seção 5 campo a campo contra as 5 respostas da entrevista (etapa que a própria skill deveria ter feito na sua Etapa 4 de autocrítica, e não fez — a autocrítica focou em rebaixar `confiança`, não em conferir aderência ao horizonte pedido). Bastou grepar os valores de `prazo:` no YAML e comparar com `horizonte: 2030` do frontmatter para achar a inconsistência.
+
+**Por que isso é plausível de passar despercebido**: os quatro casos são exatamente os efeitos de 3ª ordem — os mais distantes causalmente e com confiança já "baixa" — então a atenção humana naturalmente vai menos para eles do que para os efeitos de 1ª ordem, que são os mais visíveis do documento.
+
+**O que fazer daqui pra frente (correção na skill, não no documento de teste)**: a Etapa 4 (autocrítica) do `SKILL.md` deveria incluir explicitamente uma checagem de que nenhum `prazo` no YAML excede o `horizonte` do frontmatter — e, quando um efeito causal genuinamente só se manifestaria depois do horizonte pedido, a skill deveria dizer isso em prosa ("este efeito provavelmente só se consolida após o horizonte pedido") em vez de simplesmente atribuir uma data fora do intervalo sem comentário. Não fiz esse ajuste no `SKILL.md` desta entrega para manter a rodada de `TESTE.md` fiel ao que realmente aconteceu sem edição — mas é a correção a aplicar na próxima iteração da skill.
