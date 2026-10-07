@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>O que era app vira link</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: 16:9 slides, one per printed page; a "URL bar" strip on top of each slide as the recurring device (the subject is the link). */
+:root{
+  --ground:#141a2e;      /* deep console blue */
+  --panel:#1d2440;
+  --line:#2f3961;
+  --ink:#eef0f7;
+  --mute:#9aa3c4;
+  --amber:#ffb547;       /* power LED */
+  --c-alta:#7fd4a8; --c-media:#ffb547; --c-baixa:#e47a7a;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme:dark;
+}
+@page{size:1280px 720px;margin:0}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body)}
+.slide{width:1280px;height:720px;position:relative;overflow:hidden;padding:84px 72px 48px;display:flex;flex-direction:column;gap:24px;page-break-after:always;break-after:page;background:var(--ground)}
+.slide:last-child{page-break-after:auto;break-after:auto}
+.bar{position:absolute;top:22px;left:72px;right:72px;height:34px;border:1px solid var(--line);border-radius:17px;display:flex;align-items:center;gap:12px;padding:0 16px;font:400 15px/1 var(--mono);color:var(--mute);background:var(--panel)}
+.bar .dot{width:10px;height:10px;border-radius:50%;background:var(--amber);flex:none}
+.bar .url b{color:var(--ink);font-weight:500}
+.bar .n{margin-left:auto;font-variant-numeric:tabular-nums}
+h1,h2{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:46px;font-weight:700;line-height:1.08}
+h2 em{font-style:normal;color:var(--amber)}
+.kicker{font:500 14px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+p,li{font-size:23px;line-height:1.42}
+ul{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:10px}
+.mute{color:var(--mute)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;min-height:0}
+.cols>*{min-width:0}
+.box{border:1px solid var(--line);border-radius:10px;padding:22px 26px;background:var(--panel)}
+.box h3{margin:0 0 12px;font:600 15px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.box li{font-size:20px}
+.src{position:absolute;bottom:20px;left:72px;right:72px;font:400 12.5px/1.35 var(--mono);color:var(--mute)}
+/* title */
+.title{justify-content:center;gap:28px}
+.title h1{font-size:104px;font-weight:800;line-height:.95}
+.title h1 span{color:var(--amber)}
+.title .meta{font:400 20px/1.5 var(--mono);color:var(--mute)}
+/* timeline */
+.tl{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:6px}
+.tl div{border-top:3px solid var(--amber);padding-top:12px}
+.tl b{display:block;font:700 30px/1 var(--display);margin-bottom:8px}
+.tl span{font-size:18px;line-height:1.35;color:var(--ink)}
+.tl .gap{border-top-color:var(--c-baixa)}
+/* wheel tree */
+.tree{display:grid;grid-template-columns:repeat(3,1fr);gap:10px 14px;align-content:start;flex:1}
+.tree .hd{font:500 13px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute);padding-bottom:4px}
+.fx{border:1px solid var(--line);border-left:5px solid var(--c-media);border-radius:8px;padding:10px 12px;background:var(--panel);font-size:16.5px;line-height:1.3;display:flex;flex-direction:column;gap:6px}
+.fx.alta{border-left-color:var(--c-alta)}.fx.baixa{border-left-color:var(--c-baixa)}
+.fx small{font:400 12.5px/1 var(--mono);color:var(--mute)}
+.fx.span2{grid-row:span 2;justify-content:center}
+.legend{display:flex;gap:22px;font:400 13px/1 var(--mono);color:var(--mute)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+/* table */
+table{border-collapse:collapse;width:100%;font-size:19px}
+th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 13px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+td code{font:500 18px var(--mono);color:var(--amber)}
+.tag{font:500 14px var(--mono);padding:2px 8px;border-radius:4px}
+.tag.a{background:rgba(127,212,168,.15);color:var(--c-alta)}.tag.m{background:rgba(255,181,71,.15);color:var(--c-media)}.tag.b{background:rgba(228,122,122,.15);color:var(--c-baixa)}
+.big{font:700 58px/1.08 var(--display);text-wrap:balance}
+.big em{font-style:normal;color:var(--amber)}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;flex:1}
+.three .box p{font-size:18.5px;margin:0}
+.q{display:flex;flex-direction:column;gap:20px;counter-reset:q}
+.q div{display:grid;grid-template-columns:56px 1fr;gap:16px;align-items:baseline;font-size:26px;line-height:1.35}
+.q div::before{counter-increment:q;content:counter(q);font:800 44px/1 var(--display);color:var(--amber)}
+</style>
+</head>
+<body>
+
+<!-- 1 -->
+<section id="s1" class="slide title">
+  <div class="bar"><span class="dot"></span><span class="url">https://<b>seu-jogo.link</b></span><span class="n">1/15</span></div>
+  <div class="kicker">Tema 15 · Criação e plataforma</div>
+  <h1>O que era app<br>vira <span>link</span></h1>
+  <p style="font-size:28px;max-width:30ch;margin:0">O navegador como console: 3D e XR sem instalação. Um mapa de futuro até 2030.</p>
+  <div class="meta">jcsc · CIN0055 Tendências em Mídia e Interação · 08/10/2026<br>skill: futurizacao-jcsc · viés neutro/cético · recorte Brasil</div>
+</section>
+
+<!-- 2 -->
+<section id="s2" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/tese</span><span class="n">2/15</span></div>
+  <div class="kicker">A tese em uma frase</div>
+  <h2>A ruptura maior não é gráfica. É <em>quem é dono da distribuição</em>.</h2>
+  <div class="three" style="margin-top:12px">
+    <div class="box"><h3>Raiz 1 · técnica</h3><p>GPU de verdade atrás de um link: WebGPU + WebAssembly 3.0 em todos os grandes navegadores.</p></div>
+    <div class="box"><h3>Raiz 2 · poder</h3><p>O jogo sai da loja e vira link dentro de YouTube, Discord, Reddit e portais, com pagamento fora da loja aberto pela Justiça.</p></div>
+    <div class="box"><h3>Raiz 3 · aposta</h3><p>XR por link: a experiência imersiva como URL, sem a loja do headset. A raiz mais frágil do mapa.</p></div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section id="s3" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/hoje</span><span class="n">3/15</span></div>
+  <div class="kicker">Onde isso está hoje · o que mudou</div>
+  <h2>Pela primeira vez, <em>todos</em> os motores de navegador têm WebGPU</h2>
+  <div class="tl">
+    <div><b>2023</b><span>Chrome 113 no desktop (Windows, macOS, ChromeOS)</span></div>
+    <div><b>2024</b><span>Chrome 121 no Android 12+</span></div>
+    <div><b>2025</b><span>Safari 26: iPhone, iPad, Mac e Vision Pro · Firefox 141 no Windows · Wasm 3.0 vira padrão</span></div>
+    <div><b>2026</b><span>Unity 6.6 tira WebGPU do experimental · glTF ratifica gaussian splats</span></div>
+    <div class="gap"><b>falta</b><span>Linux no Chrome, Firefox no Android, Godot sem WebGPU; spec ainda é CR Draft no W3C</span></div>
+  </div>
+  <div class="cols" style="margin-top:10px">
+    <div class="box"><h3>Distribuição por link já tem escala</h3><ul><li>Poki: 100 mi jogadores/mês (dado da empresa)</li><li>YouTube Playables em 50+ mercados</li><li>Discord Activities abertas a todos os devs</li></ul></div>
+    <div class="box"><h3>Brasil</h3><ul><li>Celular é a plataforma preferida (44,1%, PGB 2026)</li><li>Android = 78,8% do tráfego mobile</li><li>67% dos planos LatAm têm zero-rating para apps</li></ul></div>
+  </div>
+  <div class="src">Fontes: Chrome Developers; WebKit blog (Safari 26); Mozilla gfx; webassembly.org; Unity Discussions; Khronos glTF; Poki blog; PocketGamer.biz; Canaltech/PGB 2026; StatCounter; Teletime.</div>
+</section>
+
+<!-- 4 -->
+<section id="s4" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/hoje#o-que-nao-funciona</span><span class="n">4/15</span></div>
+  <div class="kicker">Onde isso está hoje · o que ainda não funciona</div>
+  <h2>O gargalo saiu da API e foi para <em>memória, download e dados</em></h2>
+  <div class="cols">
+    <div class="box"><h3>Técnico</h3><ul>
+      <li>iPhone sem WebXR, em nenhuma versão</li>
+      <li>Godot: sem C# na web, sem WebGPU; nativo "sempre" mais rápido</li>
+      <li>Unreal saiu da web na 4.24</li>
+      <li>iOS mata a aba por memória (relatos de ~500 MB; sem limite oficial)</li>
+      <li>Safari apaga o armazenamento do site sob pressão</li>
+    </ul></div>
+    <div class="box"><h3>Mercado</h3><ul>
+      <li>Headsets recuam: Meta fecha estúdios VR; Vision Pro vende pouco</li>
+      <li>Mini-jogos do Telegram: retenção de 5–20%</li>
+      <li>Cloud gaming esbarra em custo: Stadia fechou, Xbox impõe limite de horas em 11/2026</li>
+      <li>Zero-rating: o app patrocinado é grátis, o link gasta franquia</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section id="s5" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/descartados</span><span class="n">5/15</span></div>
+  <div class="kicker">Critério da skill: recusar o maduro</div>
+  <h2>O que ficou <em>fora</em> do mapa, e por quê</h2>
+  <table>
+    <tr><th>Candidato</th><th>Motivo</th></tr>
+    <tr><td>WebGL 1/2, three.js clássico</td><td>Maduro: é o incumbente que o WebGPU disputa</td></tr>
+    <tr><td>Portais de jogo 2D em HTML5</td><td>Maduro: Click Jogos existe desde 2004</td></tr>
+    <tr><td>PWA genérico</td><td>Maduro: a briga de 2024 na UE entra como sinal regulatório</td></tr>
+    <tr><td>Cloud gaming</td><td>Fora de escopo: é "navegador como TV", entra como força contrária</td></tr>
+    <tr><td>Gaussian splatting como raiz</td><td>Fora de escopo: é o Tema 10; aqui vira efeito de streaming</td></tr>
+    <tr><td>IA no navegador (WebNN)</td><td>Fora de escopo: é o Tema 16, apresentado hoje pela meap</td></tr>
+  </table>
+</section>
+
+<!-- 6 -->
+<section id="s6" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/roda#raiz-1</span><span class="n">6/15</span></div>
+  <div class="kicker">Roda dos futuros · Raiz 1</div>
+  <h2 style="font-size:36px">GPU de verdade atrás de um link</h2>
+  <div class="tree">
+    <div class="hd">1ª ordem</div><div class="hd">2ª ordem</div><div class="hd">3ª ordem</div>
+    <div class="fx baixa span2">Jogos 3D de porte médio lançam versão web junto com a nativa<small>e1 · sinal médio · 2028</small></div>
+    <div class="fx baixa">A demo instalável perde espaço para a demo por link<small>e1.1 · fraco · 2029</small></div>
+    <div class="fx baixa">Marketing de jogos mede "sessões por link", não downloads<small>e1.1.1 · fraco · 2030</small></div>
+    <div class="fx">"Exporta bem pra web" pesa na escolha de engine<small>e1.2 · médio · 2028</small></div>
+    <div class="fx baixa">Unity recupera terreno da Godot no nicho web<small>e1.2.1 · fraco · 2029</small></div>
+    <div class="fx span2">Visualização 3D profissional migra do software instalado para o link<small>e2 · médio · 2028</small></div>
+    <div class="fx baixa">Visualizadores 3D cobram por link, não por máquina<small>e2.1 · fraco · 2029</small></div>
+    <div class="fx baixa">TI governa 3D por política de navegador<small>e2.1.1 · fraco · 2030</small></div>
+    <div class="fx">Streaming com nível de detalhe vira competência obrigatória<small>e2.2 · forte · 2027</small></div>
+    <div class="fx baixa">Surge o "CDN de assets 3D"<small>e2.2.1 · fraco · 2030</small></div>
+  </div>
+  <div class="legend"><span><i style="background:var(--c-media)"></i>confiança média</span><span><i style="background:var(--c-baixa)"></i>confiança baixa</span></div>
+</section>
+
+<!-- 7 -->
+<section id="s7" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/roda#raiz-2</span><span class="n">7/15</span></div>
+  <div class="kicker">Roda dos futuros · Raiz 2</div>
+  <h2 style="font-size:36px">O jogo sai da loja</h2>
+  <div class="tree">
+    <div class="hd">1ª ordem</div><div class="hd">2ª ordem</div><div class="hd">3ª ordem</div>
+    <div class="fx span2">YouTube, Discord e Reddit viram consoles hospedeiros<small>e3 · sinal forte · 2027</small></div>
+    <div class="fx">O gatekeeper muda de dono: taxa e regras passam para a plataforma hospedeira<small>e3.1 · médio · 2029</small></div>
+    <div class="fx baixa">Antitruste passa a mirar as plataformas de mini-jogos<small>e3.1.1 · fraco · 2030</small></div>
+    <div class="fx">Jogos curtos gerados por IA inundam o catálogo<small>e3.2 · médio · 2028</small></div>
+    <div class="fx baixa">Descoberta vira o recurso escasso; o algoritmo decide<small>e3.2.1 · fraco · 2030</small></div>
+    <div class="fx span2">A loja web vira o caixa do jogo mobile onde a lei permite<small>e4 · sinal forte · 2027</small></div>
+    <div class="fx">Estúdios criam o "companheiro web" do jogo<small>e4.1 · médio · 2028</small></div>
+    <div class="fx baixa">Some a fronteira app/link para o jogador<small>e4.1.1 · fraco · 2030</small></div>
+    <div class="fx baixa">Brasil: Pix + loja web viram campo de teste<small>e4.2 · fraco · 2028</small></div>
+    <div class="fx baixa">Plataformas de jogo por link negociam zero-rating<small>e4.2.1 · fraco · 2030</small></div>
+  </div>
+  <div class="legend"><span><i style="background:var(--c-media)"></i>confiança média</span><span><i style="background:var(--c-baixa)"></i>confiança baixa</span></div>
+</section>
+
+<!-- 8 -->
+<section id="s8" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/roda#raiz-3</span><span class="n">8/15</span></div>
+  <div class="kicker">Roda dos futuros · Raiz 3</div>
+  <h2 style="font-size:36px">XR por link</h2>
+  <div class="tree">
+    <div class="hd">1ª ordem</div><div class="hd">2ª ordem</div><div class="hd">3ª ordem</div>
+    <div class="fx span2">Experiências imersivas curtas (marca, museu, ensino) trocam o app pelo link<small>e5 · sinal médio · 2028</small></div>
+    <div class="fx">Fim do 8th Wall comercial empurra o AR para stacks abertas<small>e5.1 · médio · 2027</small></div>
+    <div class="fx baixa">Agências absorvem o XR web; o estúdio de XR encolhe<small>e5.1.1 · fraco · 2030</small></div>
+    <div class="fx">Sem WebXR no iPhone, o AR por link cresce onde o Android domina<small>e5.2 · médio · 2028</small></div>
+    <div class="fx baixa">Brasil vira mercado de teste de AR por link<small>e5.2.1 · fraco · 2030</small></div>
+    <div class="fx baixa span2">Com o recuo dos headsets, o XR web vai para celular e óculos leves<small>e6 · sinal fraco · 2029</small></div>
+    <div class="fx span2">3D plano com modo imersivo opcional, em vez de app só imersivo<small>e6.1 · médio · 2028</small></div>
+    <div class="fx baixa span2">"App de VR" se dissolve: o imersivo vira modo de exibição<small>e6.1.1 · fraco · 2030</small></div>
+  </div>
+  <div class="legend"><span><i style="background:var(--c-media)"></i>confiança média</span><span><i style="background:var(--c-baixa)"></i>confiança baixa</span></div>
+</section>
+
+<!-- 9 -->
+<section id="s9" class="slide" style="justify-content:center">
+  <div class="bar"><span class="dot"></span><span class="url">/achado</span><span class="n">9/15</span></div>
+  <div class="kicker">O achado do mapa</div>
+  <div class="big">O tema promete "sem intermediário". A roda mostra <em>intermediários trocando de lugar</em>.</div>
+  <ul style="margin-top:8px">
+    <li><code style="font:500 20px var(--mono);color:var(--amber)">e3.1</code> a taxa sai da App Store e vai para YouTube e Discord</li>
+    <li><code style="font:500 20px var(--mono);color:var(--amber)">e1.2.1</code> a engine com WebGPU ganha poder sobre quem publica na web</li>
+    <li><code style="font:500 20px var(--mono);color:var(--amber)">e5.1</code> um fornecedor fechado (8th Wall) sai e o AR migra para stacks abertas</li>
+  </ul>
+</section>
+
+<!-- 10 -->
+<section id="s10" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/contra-o-mapa</span><span class="n">10/15</span></div>
+  <div class="kicker">Contra o próprio mapa · rebaixamentos auditáveis</div>
+  <h2>Onde eu provavelmente estou <em>errado</em></h2>
+  <table>
+    <tr><th>Efeito</th><th>Antes → depois</th><th>Motivo</th></tr>
+    <tr><td><code>e2.2</code></td><td><span class="tag a">alta</span> → <span class="tag m">média</span></td><td>Assumia limite de memória fixo no iOS; o iOS 18.2 já corrigiu parte disso</td></tr>
+    <tr><td><code>e4</code></td><td><span class="tag a">alta</span> → <span class="tag m">média</span></td><td>Depende da Suprema Corte dos EUA (recurso aceito em 06/2026) e de número da Xsolla</td></tr>
+    <tr><td><code>e3</code></td><td><span class="tag a">alta</span> → <span class="tag m">média</span></td><td>Extrapolação linear; o caso Telegram mostra que mini-jogo pode ser bolha</td></tr>
+    <tr><td><code>e1</code></td><td><span class="tag m">média</span> → <span class="tag b">baixa</span></td><td>Adoção sem precedente: Unity WebGL existe há 10 anos e nunca levou o 3D médio para a web</td></tr>
+  </table>
+  <p class="mute" style="font-size:19px;margin:0">A raiz 3 (XR) pode simplesmente não acontecer. Se cair, o mapa vira "3D sem instalação", e as raízes 1 e 2 continuam de pé.</p>
+</section>
+
+<!-- 11 -->
+<section id="s11" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/2030</span><span class="n">11/15</span></div>
+  <div class="kicker">Três cenários para 2030</div>
+  <h2>2030 já chegou, e…</h2>
+  <div class="three">
+    <div class="box"><h3 style="color:var(--c-media)">Provável</h3><p>Jogo curto, demo e visualização abrem por link; jogo grande continua instalado, com loja web ao lado. YouTube e Discord viram os maiores consoles por link e cobram suas taxas. XR por link funciona, mas é nicho. No Brasil, joga-se por link no Wi-Fi.</p></div>
+    <div class="box"><h3 style="color:var(--c-alta)">Desejável</h3><p>O link vira formato aberto: qualquer um publica um jogo ou visita 3D sem pedir permissão, com Pix e sem taxa obrigatória. Exige regulação que trate plataformas como lojas, Godot com WebGPU, fim da penalidade do zero-rating, e WebXR no iPhone.</p></div>
+    <div class="box"><h3 style="color:var(--c-baixa)">Indesejável</h3><p>A web vira só a porta de 3 ou 4 plataformas fechadas, catálogo inundado de jogos gerados por IA, criador independente some. Sinal precoce: plataformas hospedeiras publicando regras mais duras que as lojas sem escrutínio.</p></div>
+  </div>
+</section>
+
+<!-- 12 -->
+<section id="s12" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/o-que-a-maquina-errou</span><span class="n">12/15</span></div>
+  <div class="kicker">O que a máquina errou</div>
+  <h2>O que eu peguei a IA fazendo de errado</h2>
+  <ul>
+    <li><b>Pulou a entrevista da própria skill.</b> Reaproveitou as respostas do teste (outro tema), inclusive o recorte "Brasil", que acabou entrando como lente e não como base de dados.</li>
+    <li><b>Fontes que se contradizem:</b> o caniuse diz que o WebGPU vem desligado no Firefox, e as release notes da Mozilla dizem que vem ligado. Valeu a fonte primária.</li>
+    <li><b>Número contestado</b> tratado como fato: Hamster Kombat "300M → 41M" (a equipe do jogo contesta).</li>
+    <li><b>Números de resumo de busca</b> (CrazyGames 40–50M, Xbox +45%) foram cortados por não terem sido abertos.</li>
+    <li><b>Sobreposição de temas:</b> splats como 4ª raiz invadiam o Tema 10. Cortado.</li>
+  </ul>
+</section>
+
+<!-- 13 -->
+<section id="s13" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/experimento</span><span class="n">13/15</span></div>
+  <div class="kicker">O experimento · movimento 3</div>
+  <h2>Mesmo jogo, <em>três portas</em></h2>
+  <div class="cols">
+    <div class="box"><h3>O que é</h3><ul>
+      <li>Cena 3D pequena em three.js com WebGPU (cai para WebGL 2 se não tiver)</li>
+      <li>Porta 1: QR code no celular · Porta 2: embutida em outra página · Porta 3: instalada</li>
+      <li>Mede: tempo até jogar, WebGPU ou fallback, fps, crash</li>
+    </ul></div>
+    <div class="box"><h3>Pergunta sobre 2030</h3><p style="font-size:21px;margin:0 0 14px">O que pesa mais: os segundos que o link economiza, ou a estabilidade do app instalado? E em quantos aparelhos reais da turma a GPU por link funciona hoje?</p><h3>O que me faria mudar de ideia</h3><p style="font-size:19px;margin:0">Mais de 1/3 dos aparelhos no fallback ou travando → raiz 1 otimista demais. A turma preferindo instalar → o link não vence por fricção.</p></div>
+  </div>
+</section>
+
+<!-- 14 -->
+<section id="s14" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/discussao</span><span class="n">14/15</span></div>
+  <div class="kicker">Para a turma</div>
+  <h2>Discussão</h2>
+  <div class="q">
+    <div>Qual foi o último jogo ou experiência 3D que vocês abriram por link, sem instalar? Voltaram nele depois?</div>
+    <div>Se o jogo sai da App Store e vai para dentro do YouTube ou do Discord, a gente ficou mais livre ou só trocou de dono?</div>
+    <div>XR por link: vale apostar num mercado de headsets que está encolhendo, ou o futuro do "imersivo" é o celular?</div>
+    <div>No Brasil, o zero-rating mata o jogo por link? O que mudaria isso?</div>
+  </div>
+</section>
+
+<!-- 15 -->
+<section id="s15" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/fontes</span><span class="n">15/15</span></div>
+  <div class="kicker">Fontes principais · lista completa (62) no documento</div>
+  <h2 style="font-size:36px">De onde vem cada afirmação</h2>
+  <div class="cols" style="font:400 15px/1.5 var(--mono);color:var(--mute)">
+    <div>developer.chrome.com · WebGPU overview / New in WebGPU 121<br>webkit.org · Safari 26.0 e 18.0 features; storage policy<br>mozillagfx · WebGPU no Firefox 141<br>w3.org/TR · WebGPU, WebXR (CR Draft)<br>webassembly.org · Wasm 3.0 e tabela de recursos<br>discussions.unity.com · WebGPU fora do experimental (6.6)<br>docs.godotengine.org · exportação web<br>threejs.org · WebGPURenderer<br>Khronos · KHR_gaussian_splatting<br>caniuse · webgpu, webxr</div>
+    <div>poki.com/blog · retrospectiva 2025<br>pocketgamer.biz · YouTube Playables, Discord Activities<br>techcrunch · Epic v. Apple; Apple no Japão; Meta/Horizon<br>9to5mac · Suprema Corte aceita recurso da Apple<br>news.xbox.com · limite de horas do Cloud Gaming<br>theblock · retenção dos jogos no Telegram<br>gamedeveloper · Meta fecha estúdios VR<br>canaltech / mobiletime · Pesquisa Game Brasil 2026/2025<br>statcounter · Android x iOS no Brasil<br>teletime · zero-rating na América Latina</div>
+  </div>
+</section>
+
+</body>
+</html>
