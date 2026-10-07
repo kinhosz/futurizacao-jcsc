@@ -77,13 +77,22 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 .q{display:flex;flex-direction:column;gap:20px;counter-reset:q}
 .q div{display:grid;grid-template-columns:56px 1fr;gap:16px;align-items:baseline;font-size:26px;line-height:1.35}
 .q div::before{counter-increment:q;content:counter(q);font:800 44px/1 var(--display);color:var(--amber)}
+
+.root{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start}
+.root>.box{min-width:0;display:flex;flex-direction:column;gap:10px}
+.root .box p{font-size:17.5px;line-height:1.42;margin:0}
+.root .box ul{gap:6px;padding-left:1em}
+.root .box li{font-size:17px;line-height:1.38}
+.root h3.rompe{color:var(--amber)}
+.key{border-top:1px solid var(--line);padding-top:14px;font-size:19px;line-height:1.4;color:var(--ink)}
+.key b{font:500 13px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-right:10px}
 </style>
 </head>
 <body>
 
 <!-- 1 -->
 <section id="s1" class="slide title">
-  <div class="bar"><span class="dot"></span><span class="url">https://<b>seu-jogo.link</b></span><span class="n">1/15</span></div>
+  <div class="bar"><span class="dot"></span><span class="url">https://<b>seu-jogo.link</b></span><span class="n">1/18</span></div>
   <div class="kicker">Tema 15 · Criação e plataforma</div>
   <h1>O que era app<br>vira <span>link</span></h1>
   <p style="font-size:28px;max-width:30ch;margin:0">O navegador como console: 3D e XR sem instalação. Um mapa de futuro até 2030.</p>
@@ -92,7 +101,7 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 
 <!-- 2 -->
 <section id="s2" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/tese</span><span class="n">2/15</span></div>
+  <div class="bar"><span class="dot"></span><span class="url">/tese</span><span class="n">2/18</span></div>
   <div class="kicker">A tese em uma frase</div>
   <h2>A ruptura maior não é gráfica. É <em>quem é dono da distribuição</em>.</h2>
   <div class="three" style="margin-top:12px">
@@ -100,11 +109,12 @@ td code{font:500 18px var(--mono);color:var(--amber)}
     <div class="box"><h3>Raiz 2 · poder</h3><p>O jogo sai da loja e vira link dentro de YouTube, Discord, Reddit e portais, com pagamento fora da loja aberto pela Justiça.</p></div>
     <div class="box"><h3>Raiz 3 · aposta</h3><p>XR por link: a experiência imersiva como URL, sem a loja do headset. A raiz mais frágil do mapa.</p></div>
   </div>
+  <p class="mute" style="font-size:18px;margin:0">Cada raiz em detalhe adiante: o que rompe, por que agora, o que falta e os efeitos que ela provoca.</p>
 </section>
 
 <!-- 3 -->
 <section id="s3" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/hoje</span><span class="n">3/15</span></div>
+  <div class="bar"><span class="dot"></span><span class="url">/hoje</span><span class="n">3/18</span></div>
   <div class="kicker">Onde isso está hoje · o que mudou</div>
   <h2>Pela primeira vez, <em>todos</em> os motores de navegador têm WebGPU</h2>
   <div class="tl">
@@ -123,7 +133,7 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 
 <!-- 4 -->
 <section id="s4" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/hoje#o-que-nao-funciona</span><span class="n">4/15</span></div>
+  <div class="bar"><span class="dot"></span><span class="url">/hoje#o-que-nao-funciona</span><span class="n">4/18</span></div>
   <div class="kicker">Onde isso está hoje · o que ainda não funciona</div>
   <h2>O gargalo saiu da API e foi para <em>memória, download e dados</em></h2>
   <div class="cols">
@@ -145,7 +155,7 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 
 <!-- 5 -->
 <section id="s5" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/descartados</span><span class="n">5/15</span></div>
+  <div class="bar"><span class="dot"></span><span class="url">/descartados</span><span class="n">5/18</span></div>
   <div class="kicker">Critério da skill: recusar o maduro</div>
   <h2>O que ficou <em>fora</em> do mapa, e por quê</h2>
   <table>
@@ -159,9 +169,22 @@ td code{font:500 18px var(--mono);color:var(--amber)}
   </table>
 </section>
 
-<!-- 6 -->
+<!-- raiz -->
 <section id="s6" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/roda#raiz-1</span><span class="n">6/15</span></div>
+  <div class="bar"><span class="dot"></span><span class="url">/raizes#1-gpu-no-link</span><span class="n">6/18</span></div>
+  <div class="kicker">Disrupção-raiz 1 · técnica</div>
+  <h2 style="font-size:40px">GPU de verdade atrás de um link</h2>
+  <div class="root">
+    <div class="box"><h3 class="rompe">O que rompe</h3><p>A premissa de que 3D sério exige instalar. O WebGL (2011) nunca teve <i>compute shader</i>: física, partículas e ordenação de splats rodavam na CPU ou não rodavam.</p><p>O WebGPU dá acesso à GPU no modelo moderno (o mesmo de Vulkan, Metal e D3D12). O WebAssembly 3.0 traz GC e memória de 64 bits para engines compiladas.</p></div>
+    <div class="box"><h3>Por que agora</h3><ul><li>Chrome 113 no desktop (2023), Chrome 121 no Android (2024)</li><li><b>Safari 26 (set/2025)</b> fecha o ciclo: iPhone, iPad, Mac e Vision Pro</li><li>Firefox 141 no Windows e 145 no macOS (2025)</li><li>Wasm 3.0 vira padrão (set/2025); Unity 6.6 tira WebGPU do experimental (ago/2026)</li></ul></div>
+    <div class="box"><h3>O que ainda falta</h3><ul><li>Chrome no Linux e Firefox no Android</li><li>Godot sem WebGPU e sem C# na web; Unreal fora desde 2019</li><li>Memória no iOS: a aba morre e a Apple não publica o limite</li><li>Spec ainda é Candidate Recommendation Draft no W3C</li></ul></div>
+  </div>
+  <div class="key"><b>A dúvida</b>Se a GPU já está no link, por que quase ninguém lança 3D sério na web? É essa pergunta que derrubou a confiança do efeito e1.</div>
+</section>
+
+<!-- 6 -->
+<section id="s7" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/roda#raiz-1</span><span class="n">7/18</span></div>
   <div class="kicker">Roda dos futuros · Raiz 1</div>
   <h2 style="font-size:36px">GPU de verdade atrás de um link</h2>
   <div class="tree">
@@ -180,9 +203,22 @@ td code{font:500 18px var(--mono);color:var(--amber)}
   <div class="legend"><span><i style="background:var(--c-media)"></i>confiança média</span><span><i style="background:var(--c-baixa)"></i>confiança baixa</span></div>
 </section>
 
+<!-- raiz -->
+<section id="s8" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/raizes#2-fora-da-loja</span><span class="n">8/18</span></div>
+  <div class="kicker">Disrupção-raiz 2 · poder</div>
+  <h2 style="font-size:40px">O jogo sai da loja</h2>
+  <div class="root">
+    <div class="box"><h3 class="rompe">O que rompe</h3><p>A estrutura de poder. Desde 2008 a loja de apps é o "console" do celular: decide o que entra e fica com até 30% de cada venda.</p><p>Agora o jogo vive como link <b>dentro de outras plataformas</b>, e o pagamento pode ir para a web. Não muda a técnica; muda <b>quem manda</b>. Por isso é disrupção e não melhoria.</p></div>
+    <div class="box"><h3>Por que agora</h3><ul><li><b>Plataformas:</b> Discord abre Activities para todos (09/2024); YouTube Playables em 50+ mercados (2026); Reddit paga devs; Poki com 100 mi jogadores/mês</li><li><b>Lei:</b> Epic v. Apple (30/04/2025) obriga a liberar link de compra sem comissão nos EUA; DMA na UE; lei japonesa (12/2025)</li><li>Fortnite volta à App Store com compra pela web; Supercell linka sua loja web</li></ul></div>
+    <div class="box"><h3>O que ainda falta</h3><ul><li>A Suprema Corte dos EUA julgar o recurso da Apple (aceito em 06/2026)</li><li>Provar que jogo hospedado retém jogador: no Telegram a retenção foi de 5–20%</li><li>Saber a taxa das plataformas hospedeiras: não é pública, então não dá para dizer se é melhor que os 30%</li></ul></div>
+  </div>
+  <div class="key"><b>O risco</b>O gatekeeper não some, só troca de dono: da App Store para o YouTube e o Discord. É o achado central do mapa (slide 12).</div>
+</section>
+
 <!-- 7 -->
-<section id="s7" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/roda#raiz-2</span><span class="n">7/15</span></div>
+<section id="s9" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/roda#raiz-2</span><span class="n">9/18</span></div>
   <div class="kicker">Roda dos futuros · Raiz 2</div>
   <h2 style="font-size:36px">O jogo sai da loja</h2>
   <div class="tree">
@@ -201,9 +237,22 @@ td code{font:500 18px var(--mono);color:var(--amber)}
   <div class="legend"><span><i style="background:var(--c-media)"></i>confiança média</span><span><i style="background:var(--c-baixa)"></i>confiança baixa</span></div>
 </section>
 
+<!-- raiz -->
+<section id="s10" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/raizes#3-xr-por-link</span><span class="n">10/18</span></div>
+  <div class="kicker">Disrupção-raiz 3 · aposta</div>
+  <h2 style="font-size:40px">XR por link</h2>
+  <div class="root">
+    <div class="box"><h3 class="rompe">O que rompe</h3><p>A obrigação de publicar uma experiência imersiva em cada loja de headset (Quest, visionOS, Android XR).</p><p>Com WebXR, <b>o mesmo link</b> abre na tela plana ou no modo imersivo. Para coisas curtas, como museu, marca ou aula, ninguém precisa instalar um app para usar uma vez.</p></div>
+    <div class="box"><h3>Por que agora</h3><ul><li>Pela primeira vez, as <b>três</b> plataformas de headset têm navegador imersivo ao mesmo tempo</li><li>Vision Pro: sessões <code>immersive-vr</code> desde o Safari 18</li><li>Quest Browser: WebGPU e WebXR em versões de 2026</li><li>Android XR: hit test, mãos, âncoras e profundidade</li></ul></div>
+    <div class="box"><h3>O que ainda falta</h3><ul><li>WebXR no iPhone: nenhum sinal, em nenhuma versão</li><li>Mercado de headsets encolhendo: Meta fechou 3 estúdios VR; Reality Labs ~US$ 80 bi de prejuízo; Vision Pro vende pouco</li><li>Os óculos que vendem (Ray-Ban Meta, 7 mi em 2025) não têm WebXR verificado</li></ul></div>
+  </div>
+  <div class="key"><b>Por que mantive</b>É o "XR" do nome do tema, e o mapa foi montado para sobreviver se ela cair: as raízes 1 e 2 não dependem dela.</div>
+</section>
+
 <!-- 8 -->
-<section id="s8" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/roda#raiz-3</span><span class="n">8/15</span></div>
+<section id="s11" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/roda#raiz-3</span><span class="n">11/18</span></div>
   <div class="kicker">Roda dos futuros · Raiz 3</div>
   <h2 style="font-size:36px">XR por link</h2>
   <div class="tree">
@@ -221,8 +270,8 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 </section>
 
 <!-- 9 -->
-<section id="s9" class="slide" style="justify-content:center">
-  <div class="bar"><span class="dot"></span><span class="url">/achado</span><span class="n">9/15</span></div>
+<section id="s12" class="slide" style="justify-content:center">
+  <div class="bar"><span class="dot"></span><span class="url">/achado</span><span class="n">12/18</span></div>
   <div class="kicker">O achado do mapa</div>
   <div class="big">O tema promete "sem intermediário". A roda mostra <em>intermediários trocando de lugar</em>.</div>
   <ul style="margin-top:8px">
@@ -233,8 +282,8 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 </section>
 
 <!-- 10 -->
-<section id="s10" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/contra-o-mapa</span><span class="n">10/15</span></div>
+<section id="s13" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/contra-o-mapa</span><span class="n">13/18</span></div>
   <div class="kicker">Contra o próprio mapa · rebaixamentos auditáveis</div>
   <h2>Onde eu provavelmente estou <em>errado</em></h2>
   <table>
@@ -248,8 +297,8 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 </section>
 
 <!-- 11 -->
-<section id="s11" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/2030</span><span class="n">11/15</span></div>
+<section id="s14" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/2030</span><span class="n">14/18</span></div>
   <div class="kicker">Três cenários para 2030</div>
   <h2>2030 já chegou, e…</h2>
   <div class="three">
@@ -260,8 +309,8 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 </section>
 
 <!-- 12 -->
-<section id="s12" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/o-que-a-maquina-errou</span><span class="n">12/15</span></div>
+<section id="s15" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/o-que-a-maquina-errou</span><span class="n">15/18</span></div>
   <div class="kicker">O que a máquina errou</div>
   <h2>O que eu peguei a IA fazendo de errado</h2>
   <ul>
@@ -274,8 +323,8 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 </section>
 
 <!-- 13 -->
-<section id="s13" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/experimento</span><span class="n">13/15</span></div>
+<section id="s16" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/experimento</span><span class="n">16/18</span></div>
   <div class="kicker">O experimento · movimento 3</div>
   <h2>Mesmo jogo, <em>três portas</em></h2>
   <div class="cols">
@@ -289,8 +338,8 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 </section>
 
 <!-- 14 -->
-<section id="s14" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/discussao</span><span class="n">14/15</span></div>
+<section id="s17" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/discussao</span><span class="n">17/18</span></div>
   <div class="kicker">Para a turma</div>
   <h2>Discussão</h2>
   <div class="q">
@@ -302,8 +351,8 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 </section>
 
 <!-- 15 -->
-<section id="s15" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/fontes</span><span class="n">15/15</span></div>
+<section id="s18" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/fontes</span><span class="n">18/18</span></div>
   <div class="kicker">Fontes principais · lista completa (62) no documento</div>
   <h2 style="font-size:36px">De onde vem cada afirmação</h2>
   <div class="cols" style="font:400 15px/1.5 var(--mono);color:var(--mute)">
