@@ -144,14 +144,6 @@ Só para deixar na tela se alguém pedir. A lista completa, com 62 fontes, está
 - "Quem aqui já jogou algo no Discord ou no YouTube sem instalar? Vocês sabiam quem fica com o dinheiro?"
 - "Se a Apple ligasse o WebXR no iPhone amanhã, o que mudaria?" (é o wildcard do mapa)
 
-## Perguntas que o professor pode fazer (e o que responder)
-
-- **"Isso não é só WebGL de novo? O que é novo?"** → WebGL não tem compute shader; WebGPU tem, e desde 2025 está em todos os motores, inclusive no iPhone. E a novidade maior nem é técnica, é a distribuição (raiz 2).
-- **"Por que cloud gaming ficou de fora?"** → Porque ali o navegador é só uma TV: o processamento fica no servidor. Usei como força contrária: o Stadia fechou e o Xbox Cloud vai ter limite de horas porque "o custo cresce conforme mais gente joga". Rodar no aparelho do jogador não tem esse custo.
-- **"Seu recorte é Brasil, mas os dados são globais."** → Verdade, e está registrado na seção 8. Os dados brasileiros que usei: PGB, StatCounter (Android 79%) e zero-rating. O experimento serve justamente para medir com os aparelhos reais da turma.
-- **"Qual efeito é extrapolação linear?"** → `e3` (plataformas como consoles) e `e5.1` (AR migrando para stacks abertas): sinal alto, pouco valor preditivo.
-- **"Você fez isso com IA, o que é seu?"** → Responda com sinceridade sobre o que você revisou e decidiu. Antes da aula, leia pelo menos as seções 4, 5 e 7 do documento.
-
 ---
 
 ## ⚠️ Antes da aula — checklist
