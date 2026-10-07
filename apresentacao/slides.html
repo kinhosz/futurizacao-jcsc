@@ -86,22 +86,48 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 .root h3.rompe{color:var(--amber)}
 .key{border-top:1px solid var(--line);padding-top:14px;font-size:19px;line-height:1.4;color:var(--ink)}
 .key b{font:500 13px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-right:10px}
+
+.xr{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.xr>.box{min-width:0;display:flex;flex-direction:column;gap:8px}
+.xr .sig{font:800 64px/1 var(--display);color:var(--amber)}
+.xr .nm{font:600 20px/1.2 var(--body)}
+.xr p{font-size:18px;line-height:1.4;margin:0}
+.xr .ex{font:400 14px/1.4 var(--mono);color:var(--mute)}
+.gloss{display:grid;grid-template-columns:1fr 1fr;gap:18px;border-top:1px solid var(--line);padding-top:14px}
+.gloss p{font-size:18px;line-height:1.4;margin:0}
+.gloss b{font:500 13px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:6px}
 </style>
 </head>
 <body>
 
 <!-- 1 -->
 <section id="s1" class="slide title">
-  <div class="bar"><span class="dot"></span><span class="url">https://<b>seu-jogo.link</b></span><span class="n">1/18</span></div>
+  <div class="bar"><span class="dot"></span><span class="url">https://<b>seu-jogo.link</b></span><span class="n">1/19</span></div>
   <div class="kicker">Tema 15 · Criação e plataforma</div>
   <h1>O que era app<br>vira <span>link</span></h1>
   <p style="font-size:28px;max-width:30ch;margin:0">O navegador como console: 3D e XR sem instalação. Um mapa de futuro até 2030.</p>
   <div class="meta">jcsc · CIN0055 Tendências em Mídia e Interação · 08/10/2026<br>skill: futurizacao-jcsc · viés neutro/cético · recorte Brasil</div>
 </section>
 
-<!-- 2 -->
+<!-- glossario -->
 <section id="s2" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/tese</span><span class="n">2/18</span></div>
+  <div class="bar"><span class="dot"></span><span class="url">/antes-de-comecar</span><span class="n">2/19</span></div>
+  <div class="kicker">Antes de começar · 30 segundos</div>
+  <h2 style="font-size:40px">XR = <em>VR + AR + MR</em></h2>
+  <div class="xr">
+    <div class="box"><div class="sig">VR</div><div class="nm">Realidade Virtual</div><p>Você <b>sai</b> do mundo: tudo em volta é digital e o mundo real some.</p><div class="ex">ex.: jogo no Meta Quest</div></div>
+    <div class="box"><div class="sig">AR</div><div class="nm">Realidade Aumentada</div><p>Você <b>adiciona</b> ao mundo: objetos digitais por cima do mundo real, quase sempre pela câmera do celular.</p><div class="ex">ex.: Pokémon GO, ver um sofá na sua sala</div></div>
+    <div class="box"><div class="sig">MR</div><div class="nm">Realidade Mista</div><p>Você <b>mistura</b> com o mundo: o objeto digital entende o ambiente, fica em cima da mesa e some atrás da parede.</p><div class="ex">ex.: Apple Vision Pro</div></div>
+  </div>
+  <div class="gloss">
+    <p><b>Compute shader</b>O WebGL só deixava a GPU desenhar. O WebGPU deixa a GPU calcular: física, partículas, IA.</p>
+    <p><b>Ruptura (disrupção)</b>Muda as regras do jogo, não só o placar. Se não dá para dizer o que rompe, é só melhoria.</p>
+  </div>
+</section>
+
+<!-- 2 -->
+<section id="s3" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/tese</span><span class="n">3/19</span></div>
   <div class="kicker">A tese em uma frase</div>
   <h2>A ruptura maior não é gráfica. É <em>quem é dono da distribuição</em>.</h2>
   <div class="three" style="margin-top:12px">
@@ -113,8 +139,8 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 </section>
 
 <!-- 3 -->
-<section id="s3" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/hoje</span><span class="n">3/18</span></div>
+<section id="s4" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/hoje</span><span class="n">4/19</span></div>
   <div class="kicker">Onde isso está hoje · o que mudou</div>
   <h2>Pela primeira vez, <em>todos</em> os motores de navegador têm WebGPU</h2>
   <div class="tl">
@@ -132,8 +158,8 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 </section>
 
 <!-- 4 -->
-<section id="s4" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/hoje#o-que-nao-funciona</span><span class="n">4/18</span></div>
+<section id="s5" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/hoje#o-que-nao-funciona</span><span class="n">5/19</span></div>
   <div class="kicker">Onde isso está hoje · o que ainda não funciona</div>
   <h2>O gargalo saiu da API e foi para <em>memória, download e dados</em></h2>
   <div class="cols">
@@ -154,8 +180,8 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 </section>
 
 <!-- 5 -->
-<section id="s5" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/descartados</span><span class="n">5/18</span></div>
+<section id="s6" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/descartados</span><span class="n">6/19</span></div>
   <div class="kicker">Critério da skill: recusar o maduro</div>
   <h2>O que ficou <em>fora</em> do mapa, e por quê</h2>
   <table>
@@ -170,8 +196,8 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 </section>
 
 <!-- raiz -->
-<section id="s6" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/raizes#1-gpu-no-link</span><span class="n">6/18</span></div>
+<section id="s7" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/raizes#1-gpu-no-link</span><span class="n">7/19</span></div>
   <div class="kicker">Disrupção-raiz 1 · técnica</div>
   <h2 style="font-size:40px">GPU de verdade atrás de um link</h2>
   <div class="root">
@@ -183,8 +209,8 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 </section>
 
 <!-- 6 -->
-<section id="s7" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/roda#raiz-1</span><span class="n">7/18</span></div>
+<section id="s8" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/roda#raiz-1</span><span class="n">8/19</span></div>
   <div class="kicker">Roda dos futuros · Raiz 1</div>
   <h2 style="font-size:36px">GPU de verdade atrás de um link</h2>
   <div class="tree">
@@ -204,8 +230,8 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 </section>
 
 <!-- raiz -->
-<section id="s8" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/raizes#2-fora-da-loja</span><span class="n">8/18</span></div>
+<section id="s9" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/raizes#2-fora-da-loja</span><span class="n">9/19</span></div>
   <div class="kicker">Disrupção-raiz 2 · poder</div>
   <h2 style="font-size:40px">O jogo sai da loja</h2>
   <div class="root">
@@ -213,12 +239,12 @@ td code{font:500 18px var(--mono);color:var(--amber)}
     <div class="box"><h3>Por que agora</h3><ul><li><b>Plataformas:</b> Discord abre Activities para todos (09/2024); YouTube Playables em 50+ mercados (2026); Reddit paga devs; Poki com 100 mi jogadores/mês</li><li><b>Lei:</b> Epic v. Apple (30/04/2025) obriga a liberar link de compra sem comissão nos EUA; DMA na UE; lei japonesa (12/2025)</li><li>Fortnite volta à App Store com compra pela web; Supercell linka sua loja web</li></ul></div>
     <div class="box"><h3>O que ainda falta</h3><ul><li>A Suprema Corte dos EUA julgar o recurso da Apple (aceito em 06/2026)</li><li>Provar que jogo hospedado retém jogador: no Telegram a retenção foi de 5–20%</li><li>Saber a taxa das plataformas hospedeiras: não é pública, então não dá para dizer se é melhor que os 30%</li></ul></div>
   </div>
-  <div class="key"><b>O risco</b>O gatekeeper não some, só troca de dono: da App Store para o YouTube e o Discord. É o achado central do mapa (slide 12).</div>
+  <div class="key"><b>O risco</b>O gatekeeper não some, só troca de dono: da App Store para o YouTube e o Discord. É o achado central do mapa (slide 13).</div>
 </section>
 
 <!-- 7 -->
-<section id="s9" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/roda#raiz-2</span><span class="n">9/18</span></div>
+<section id="s10" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/roda#raiz-2</span><span class="n">10/19</span></div>
   <div class="kicker">Roda dos futuros · Raiz 2</div>
   <h2 style="font-size:36px">O jogo sai da loja</h2>
   <div class="tree">
@@ -238,8 +264,8 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 </section>
 
 <!-- raiz -->
-<section id="s10" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/raizes#3-xr-por-link</span><span class="n">10/18</span></div>
+<section id="s11" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/raizes#3-xr-por-link</span><span class="n">11/19</span></div>
   <div class="kicker">Disrupção-raiz 3 · aposta</div>
   <h2 style="font-size:40px">XR por link</h2>
   <div class="root">
@@ -251,8 +277,8 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 </section>
 
 <!-- 8 -->
-<section id="s11" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/roda#raiz-3</span><span class="n">11/18</span></div>
+<section id="s12" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/roda#raiz-3</span><span class="n">12/19</span></div>
   <div class="kicker">Roda dos futuros · Raiz 3</div>
   <h2 style="font-size:36px">XR por link</h2>
   <div class="tree">
@@ -270,8 +296,8 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 </section>
 
 <!-- 9 -->
-<section id="s12" class="slide" style="justify-content:center">
-  <div class="bar"><span class="dot"></span><span class="url">/achado</span><span class="n">12/18</span></div>
+<section id="s13" class="slide" style="justify-content:center">
+  <div class="bar"><span class="dot"></span><span class="url">/achado</span><span class="n">13/19</span></div>
   <div class="kicker">O achado do mapa</div>
   <div class="big">O tema promete "sem intermediário". A roda mostra <em>intermediários trocando de lugar</em>.</div>
   <ul style="margin-top:8px">
@@ -282,8 +308,8 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 </section>
 
 <!-- 10 -->
-<section id="s13" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/contra-o-mapa</span><span class="n">13/18</span></div>
+<section id="s14" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/contra-o-mapa</span><span class="n">14/19</span></div>
   <div class="kicker">Contra o próprio mapa · rebaixamentos auditáveis</div>
   <h2>Onde eu provavelmente estou <em>errado</em></h2>
   <table>
@@ -297,8 +323,8 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 </section>
 
 <!-- 11 -->
-<section id="s14" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/2030</span><span class="n">14/18</span></div>
+<section id="s15" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/2030</span><span class="n">15/19</span></div>
   <div class="kicker">Três cenários para 2030</div>
   <h2>2030 já chegou, e…</h2>
   <div class="three">
@@ -309,8 +335,8 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 </section>
 
 <!-- 12 -->
-<section id="s15" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/o-que-a-maquina-errou</span><span class="n">15/18</span></div>
+<section id="s16" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/o-que-a-maquina-errou</span><span class="n">16/19</span></div>
   <div class="kicker">O que a máquina errou</div>
   <h2>O que eu peguei a IA fazendo de errado</h2>
   <ul>
@@ -323,8 +349,8 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 </section>
 
 <!-- 13 -->
-<section id="s16" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/experimento</span><span class="n">16/18</span></div>
+<section id="s17" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/experimento</span><span class="n">17/19</span></div>
   <div class="kicker">O experimento · movimento 3</div>
   <h2>Mesmo jogo, <em>três portas</em></h2>
   <div class="cols">
@@ -338,8 +364,8 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 </section>
 
 <!-- 14 -->
-<section id="s17" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/discussao</span><span class="n">17/18</span></div>
+<section id="s18" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/discussao</span><span class="n">18/19</span></div>
   <div class="kicker">Para a turma</div>
   <h2>Discussão</h2>
   <div class="q">
@@ -351,8 +377,8 @@ td code{font:500 18px var(--mono);color:var(--amber)}
 </section>
 
 <!-- 15 -->
-<section id="s18" class="slide">
-  <div class="bar"><span class="dot"></span><span class="url">/fontes</span><span class="n">18/18</span></div>
+<section id="s19" class="slide">
+  <div class="bar"><span class="dot"></span><span class="url">/fontes</span><span class="n">19/19</span></div>
   <div class="kicker">Fontes principais · lista completa (62) no documento</div>
   <h2 style="font-size:36px">De onde vem cada afirmação</h2>
   <div class="cols" style="font:400 15px/1.5 var(--mono);color:var(--mute)">
