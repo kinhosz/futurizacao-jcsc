@@ -383,7 +383,8 @@ if (OBSERVADOR) {
   $('dica').textContent = 'modo observador · tecla P mostra/oculta o painel';
   $('iniciar').onclick = iniciarRodada;
   $('iniciar').textContent = `Iniciar rodada (${DURACAO_RODADA / 1000}s)`;
-  const painelVisivel = v => { $('painel').style.display = v ? 'block' : 'none'; document.body.classList.toggle('observando', v); };
+  const painelVisivel = v => { $('painel').style.display = v ? 'block' : 'none'; $('mostrarPainel').style.display = v ? 'none' : 'block'; document.body.classList.toggle('observando', v); };
+  $('mostrarPainel').onclick = () => painelVisivel(true);
   $('ocultar').onclick = () => painelVisivel(false);
   addEventListener('keydown', e => { if (e.key === 'p') painelVisivel($('painel').style.display === 'none'); });
   $('baixar').onclick = () => {
