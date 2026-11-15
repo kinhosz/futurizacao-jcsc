@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Pinta Chão</title>
+<style>
+  :root { --bg:#0e1116; --fg:#f2f2f2; --muted:#9aa3ad; --card:#1a1f27; --accent:#ffcc33; }
+  * { box-sizing:border-box; }
+  html, body { margin:0; height:100%; background:var(--bg); color:var(--fg);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; overflow:hidden;
+    touch-action:none; -webkit-user-select:none; user-select:none; }
+  #cena { position:fixed; inset:0; }
+  .tela { position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
+    padding:16px; background:rgba(14,17,22,.92); z-index:10; }
+  .card { background:var(--card); border-radius:14px; padding:24px; max-width:420px; width:100%; }
+  h1 { margin:0 0 6px; font-size:28px; }
+  p { color:var(--muted); line-height:1.45; margin:8px 0; }
+  input, button { font:inherit; font-size:18px; border-radius:10px; border:0; padding:12px 14px; width:100%; }
+  input { background:#0e1116; color:var(--fg); margin:12px 0; border:1px solid #333; }
+  button { background:var(--accent); color:#111; font-weight:700; cursor:pointer; }
+  button:disabled { opacity:.5; }
+  #hud { position:fixed; top:0; left:0; right:0; display:flex; justify-content:space-between;
+    align-items:flex-start; padding:10px 12px; z-index:5; pointer-events:none; gap:8px; }
+  #status { font-size:13px; color:var(--muted); background:rgba(0,0,0,.45); padding:6px 10px; border-radius:8px; max-width:60%; }
+  #placar { font-size:14px; background:rgba(0,0,0,.45); padding:6px 10px; border-radius:8px; min-width:120px; }
+  #placar div { display:flex; justify-content:space-between; gap:12px; }
+  #relogio { position:fixed; top:56px; left:50%; transform:translateX(-50%); font-size:40px; font-weight:800;
+    z-index:5; pointer-events:none; text-shadow:0 2px 8px #000; }
+  #aviso { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); z-index:6; max-width:92%;
+    background:#3a2a10; color:#ffd88a; padding:10px 14px; border-radius:10px; font-size:14px; display:none; text-align:center; }
+  #dica { position:fixed; bottom:10px; width:100%; text-align:center; color:var(--muted); font-size:13px; z-index:4; pointer-events:none; }
+  .nome { position:fixed; z-index:4; font-size:12px; font-weight:700; transform:translate(-50%,-100%);
+    pointer-events:none; text-shadow:0 1px 3px #000; white-space:nowrap; }
+  #manche { position:fixed; width:110px; height:110px; border-radius:50%; border:2px solid rgba(255,255,255,.35);
+    display:none; z-index:6; pointer-events:none; transform:translate(-50%,-50%); }
+  #manche i { position:absolute; width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,.5);
+    left:50%; top:50%; transform:translate(-50%,-50%); }
+  #fim { display:none; }
+  #fim ol { padding-left:22px; font-size:18px; }
+  /* painel do observador */
+  #painel { position:fixed; right:0; top:0; bottom:0; width:min(560px, 100%); background:rgba(14,17,22,.94);
+    z-index:7; overflow:auto; padding:12px; font-size:13px; display:none; border-left:1px solid #333; }
+  #painel h2 { font-size:16px; margin:4px 0 8px; }
+  #painel table { border-collapse:collapse; width:100%; }
+  #painel th, #painel td { text-align:left; padding:4px 6px; border-bottom:1px solid #2a2f37; vertical-align:top; }
+  #painel th { color:var(--muted); font-weight:600; }
+  #painel .botoes { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; }
+  #painel .botoes button { width:auto; font-size:14px; padding:8px 10px; }
+  #painel .resumo { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-bottom:10px; }
+  #painel .resumo div { background:var(--card); padding:8px; border-radius:8px; }
+  #painel .resumo b { display:block; font-size:20px; }
+  #log { font-family:ui-monospace, monospace; font-size:12px; color:#c7cdd4; white-space:pre-wrap; max-height:40vh; overflow:auto; }
+  .ruim { color:#ff8a8a; } .bom { color:#8aff9e; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.webgpu.js",
+  "trystero": "https://cdn.jsdelivr.net/npm/trystero@0.26.0/+esm"
+} }
+</script>
+</head>
+<body>
+<div id="cena"></div>
+
+<div id="hud">
+  <div id="status">carregando…</div>
+  <div id="placar"></div>
+</div>
+<div id="relogio"></div>
+<div id="aviso"></div>
+<div id="dica"></div>
+<div id="manche"><i></i></div>
+
+<div class="tela" id="entrada">
+  <div class="card">
+    <h1>Pinta Chão</h1>
+    <p>Um jogo 3D multiplayer que é só um link: sem instalar nada e sem servidor de jogo. Os navegadores se conectam direto entre si.</p>
+    <p>Ande pela arena e pinte o chão com a sua cor. Ganha quem tiver mais chão pintado quando o tempo acabar.</p>
+    <input id="apelido" maxlength="14" placeholder="Seu apelido" autocomplete="off">
+    <button id="entrar" disabled>carregando o jogo…</button>
+    <p style="font-size:12px">Celular: arraste o dedo na tela. Computador: setas ou WASD.<br>
+    O jogo registra, de forma anônima, o tipo de aparelho e navegador, se a conexão funcionou e quanto tempo ela levou. Isso faz parte do experimento da disciplina Tendências em Mídia e Interação (CIn/UFPE).</p>
+  </div>
+</div>
+
+<div class="tela" id="fim">
+  <div class="card">
+    <h1>Fim da rodada</h1>
+    <ol id="ranking"></ol>
+    <button id="fecharFim">Continuar</button>
+  </div>
+</div>
+
+<div id="painel">
+  <h2>Painel do observador · sala <span id="nomeSala"></span></h2>
+  <div class="botoes">
+    <button id="iniciar">Iniciar rodada (2 min)</button>
+    <button id="baixar">Baixar dados (JSON)</button>
+    <button id="ocultar">Ocultar painel</button>
+  </div>
+  <div class="resumo">
+    <div><b id="rConectados">0</b>conectados</div>
+    <div><b id="rWebgpu">–</b>em WebGPU</div>
+    <div><b id="rFalhas">0</b>falhas de conexão</div>
+  </div>
+  <table>
+    <thead><tr><th>apelido</th><th>aparelho</th><th>3D</th><th>até entrar</th><th>vê</th><th>ping</th><th>fps</th></tr></thead>
+    <tbody id="tabela"></tbody>
+  </table>
+  <h2 style="margin-top:14px">Linha do tempo</h2>
+  <div id="log"></div>
+</div>
+
+<script type="module" src="jogo.js"></script>
+</body>
+</html>
