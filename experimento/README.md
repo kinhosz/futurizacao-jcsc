@@ -48,12 +48,20 @@ Se um jogo 3D multiplayer virar só um link, sem loja, sem instalação e sem se
 
 ## O que espero que aconteça (escrito antes do teste)
 
-> ⚠️ **Rascunho: revisar com as minhas palavras antes de entregar.** Ponto de partida: as expectativas que escrevi para a ideia A no `ideias.md` (14/10), adaptadas ao teste remoto.
+**O que já vi nos meus testes (15/11), antes da turma:**
+- Três aparelhos na mesma rede Wi-Fi (meu computador com Ubuntu, outro computador e meu iPhone) se conectaram em 1 a 2 segundos, todos vendo todos.
+- O iPhone rodou o 3D em **WebGPU**; o Chrome no Ubuntu caiu para **WebGL**.
+- Uma pessoa no Brasil, pelo Wi-Fi de casa, conectou normalmente comigo na Bélgica.
+- O meu iPhone **no 4G não conectou**: achou a sala, mas a conexão direta falhou ("could not connect to peer… configure TURN"). A rede da operadora bloqueia a conexão direta.
+- Decidi **não** adicionar um servidor TURN de reserva (um intermediário que repassaria os dados para quem não consegue se conectar direto).
 
-- A maioria entra em menos de 30 segundos, mas uma parte trava em coisas que não são gráficas: rede (sobretudo 4G, que costuma bloquear conexão direta entre aparelhos), navegador desatualizado ou aba que carrega devagar.
-- Uma parte dos aparelhos não vai rodar em WebGPU e vai cair para WebGL. Imagino que sejam principalmente iPhones mais antigos e celulares Android baratos. Quase ninguém vai perceber a diferença jogando.
-- Algumas pessoas vão se conectar com parte da turma e não com todo mundo: vão ver só alguns colegas na arena. Esse é o tipo de falha que um servidor central esconde e que um jogo só de link expõe.
-- Se mais de um quarto da turma não conseguir jogar nos primeiros 2 minutos, a fricção não sumiu, só mudou de lugar: saiu da loja e da instalação e foi para a rede e o aparelho.
+**As minhas apostas para o teste de 17/11:**
+1. **Uns poucos falham.** A maioria conecta, mas 2 ou 3 pessoas (até cerca de 1/4 da turma) vão ficar sozinhas ou ver só parte dos colegas, principalmente quem estiver no 4G ou numa operadora com NAT mais fechado.
+2. **Meio a meio entre WebGPU e WebGL.** Mais ou menos metade dos aparelhos vai rodar em WebGPU, e a outra metade vai cair para WebGL.
+3. **A turma vai comentar a tecnologia.** Por ser uma turma de computação, espero que reparem e perguntem como um jogo multiplayer funciona sem servidor de jogo.
+4. **A fricção vai aparecer em dois lugares: na rede/4G e no carregamento da página.** Espero gente que não consegue se conectar e gente esperando o 3D carregar (ou tentando entrar antes de ele terminar).
+
+Se as apostas 1 e 4 se confirmarem, a resposta provisória à pergunta é: a fricção não some, muda de lugar. Sai da loja e da instalação e vai para a rede de cada um.
 
 ## Limitações conhecidas
 
