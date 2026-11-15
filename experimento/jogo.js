@@ -378,12 +378,14 @@ $('dica').textContent = aparelho.toque ? 'arraste o dedo para andar' : 'setas ou
 if (OBSERVADOR) {
   $('entrada').style.display = 'none';
   $('painel').style.display = 'block';
+  document.body.classList.add('observando');
   $('nomeSala').textContent = SALA;
   $('dica').textContent = 'modo observador · tecla P mostra/oculta o painel';
   $('iniciar').onclick = iniciarRodada;
   $('iniciar').textContent = `Iniciar rodada (${DURACAO_RODADA / 1000}s)`;
-  $('ocultar').onclick = () => { $('painel').style.display = 'none'; };
-  addEventListener('keydown', e => { if (e.key === 'p') $('painel').style.display = $('painel').style.display === 'none' ? 'block' : 'none'; });
+  const painelVisivel = v => { $('painel').style.display = v ? 'block' : 'none'; document.body.classList.toggle('observando', v); };
+  $('ocultar').onclick = () => painelVisivel(false);
+  addEventListener('keydown', e => { if (e.key === 'p') painelVisivel($('painel').style.display === 'none'); });
   $('baixar').onclick = () => {
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([JSON.stringify(exportar(), null, 2)], { type: 'application/json' }));
